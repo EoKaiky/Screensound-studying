@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ScreensoundApplication<screensound>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "spring.atividade.screensound.ScreensoundApplication",
+            "projectName": "screensound",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
