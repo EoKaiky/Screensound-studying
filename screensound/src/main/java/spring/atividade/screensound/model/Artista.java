@@ -14,8 +14,14 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "artistas")
+@Table(name = "tbl_artistas")
 public class Artista {
+
+    public Artista() {}
+    public Artista(String name, TypeArtist type) {
+        this.name = name;
+        this.type = type;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

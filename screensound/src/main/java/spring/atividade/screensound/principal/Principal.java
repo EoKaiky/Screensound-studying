@@ -2,8 +2,21 @@ package spring.atividade.screensound.principal;
 
 import java.util.Scanner;
 
+import org.aspectj.apache.bcel.Repository;
+
+import ch.qos.logback.core.rolling.TimeBasedRollingPolicy;
+import spring.atividade.screensound.model.Artista;
+import spring.atividade.screensound.model.TypeArtist;
+import spring.atividade.screensound.repository.ArtistRepository;
+
 public class Principal {
     
+    private final ArtistRepository repository;
+
+    public Principal(ArtistRepository repository) {
+        this.repository = repository;
+    }
+
     private Scanner leitura = new Scanner(System.in);
 
     public void exibeMenu(){
@@ -18,6 +31,8 @@ public class Principal {
                     3 - Listar músicas
                     4 - Buscar músicas por artistas
                     5 - Pesquisar dados sobre um artistas
+
+                    9 - Finalizar a aplicação
 
                     """;
 
@@ -49,6 +64,19 @@ public class Principal {
     }
                     
     private void cadastrarArtistas() {
+        var cadastrarNovo = "S";
+
+        while (cadastrarNovo.equalsIgnoreCase("s")) {
+          System.out.println("Qual o nome do artista: ");
+          var name = leitura.nextLine();
+          System.out.println("Digite o tipo do artista: ");
+          var type = leitura.nextLine();
+          TypeArtist typeArtist = TypeArtist.valueOf(type.toUpperCase());
+          Artista artist = new Artista(name, typeArtist);
+          repository.save(artist);
+          System.out.println("Quer pesquisar outro artista ?");
+          cadastrarNovo = leitura.nextLine();
+        }
 
     }
 
