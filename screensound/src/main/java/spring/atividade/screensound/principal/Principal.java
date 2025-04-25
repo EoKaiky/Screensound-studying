@@ -1,11 +1,12 @@
 package spring.atividade.screensound.principal;
 
+import java.util.Optional;
 import java.util.Scanner;
 
-import org.aspectj.apache.bcel.Repository;
+import org.hibernate.mapping.List;
 
-import ch.qos.logback.core.rolling.TimeBasedRollingPolicy;
 import spring.atividade.screensound.model.Artista;
+import spring.atividade.screensound.model.Musica;
 import spring.atividade.screensound.model.TypeArtist;
 import spring.atividade.screensound.repository.ArtistRepository;
 
@@ -81,11 +82,24 @@ public class Principal {
     }
 
     private void cadastrarMusicas() {
-
+        System.out.println("Cadastrar musica de qual artista ?");
+        var name = leitura.nextLine();
+        Optional<Artista> artist = repository.findByNameContainingIgnoreCase(name);
+        if(artist.isPresent()) {
+            System.out.println("Qual o nome da musica ?");
+            var titleMusic = leitura.nextLine();
+            Musica musica = new Musica(titleMusic);
+            musica.setArtist(artist.get());
+            artist.get().getmusics().add(musica);
+            repository.save(artist.get());
+        } else {
+            System.out.println("Artista não encontrado");
+        }
     }
 
     private void listarMusicas() {
-
+        List<Artista> artist = repository.findAll();
+        artist.forEach(System.out::println);
     }
 
     private void buscarMusicaArtista() {

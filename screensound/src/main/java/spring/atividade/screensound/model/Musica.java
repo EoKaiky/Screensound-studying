@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "musics")
-class Musica {
+public class Musica {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +24,12 @@ class Musica {
 
     @ManyToOne
     private Artista artist;
+
+    public Musica(){}
+    
+    public Musica(String titleMusic){
+        this.title = titleMusic;
+    }
 
     public long getId() {
         return Id;
